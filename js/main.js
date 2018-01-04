@@ -1,18 +1,5 @@
-console.log2 = function (x, y) {
-    document.write('<pre>');
 
-    if(y instanceof Song) {
-        document.write(x + '<br />');
-        for(var k in y) {
-            document.write(k + ' : ' + y[k] + '<br />');
-        }
-    } else {
-        document.write(x + y + '<br />');
-    }
-
-    document.write('</pre>');
-};
-
+// a sample model for easy validation
 var Model = Backbone.Model.extend({
 
     checkValidation: function (attrs, rules) {
@@ -84,30 +71,7 @@ song.set({
     artist: 'Michael'
 });
 
-console.log('The song: ', song);
-console.log('To json: ', song.toJSON());
-console.log('Get attr, title:', song.get('title'));
-// console.log('Remove attr, title', song.unset('title'));
-
-console.log('HasAttr, title: ', song.has('title'));
-
-console.log('Is model valid: ', song.isValid());
-song.commonMethod();
-
-var song1 = new Song({id : 2});
-song.fetch({
-        success: function (resp) {
-            console.log('Resp: ', resp);
-        },
-        error: function () {
-            console.log('error in fetching song.');
-        }
-    }
-);
-console.log('Fetched song: ', song); // the id sent to server is wrong as 10
-
 // Collections
-
 var Songs = Backbone.Collection.extend({
     model : Song,
     url: 'api/songs'
@@ -120,15 +84,13 @@ var songs = new Songs([
     new Song({title: 'Title 04'})
 ]);
 
-// Add to collection
-songs.add(new Song({title: 'Title 05'}));
-console.log('The collection: ', songs);
-console.log('Song at 1:', songs.at(1)); // starting from 0 index
-console.log('Song at c3:', songs.get('c3'));
-// Remove from collection
-songs.remove(songs.at(0));
-console.log('After songs remove: ', songs);
-
 // Fetching collections
-songs.fetch();
+songs.fetch({
+    success: function (resp) {
+        console.log('Fetching songs success.');
+    },
+    error: function () {
+        console.log('Error in fetching songs.');
+    }
+});
 
