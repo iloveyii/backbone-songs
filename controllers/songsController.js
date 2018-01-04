@@ -27,9 +27,13 @@ var songs = [
 ];
 
 var bodyParser = require('body-parser');
-var urlEncodedParser = bodyParser.urlencoded({ extend : false});
+var urlEncodedParser = bodyParser.urlencoded({extended:false});
 
 module.exports = function (app) {
+
+    // fix in body from backbone model post
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded());
 
     app.get('/api/songs', function (req, res) {
         res.set('Content-Type', 'application/json');
@@ -37,8 +41,15 @@ module.exports = function (app) {
         res.end();
     });
 
-    app.post('/api/songs/:song', urlEncodedParser, function (req, res) {
+    app.post('/api/songs', function (req, res) {
+        var song = req.body;
+        song.id = songs.length + 1;
+        console.log(song);
+        res.set('Content-Type', 'application/json');
+        songs.push(song);
 
+        res.json(songs);
+        res.end();
     });
 
     app.put('/api/songs/:song', urlEncodedParser, function (req, res) {

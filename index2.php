@@ -1,3 +1,15 @@
+<?php
+
+    $post = file_get_contents('php://input');
+
+    if(! empty($post)) {
+        echo ($post);
+
+        exit;
+    }
+
+?>
+
 <!DOCTYPE html>
 <html class="no-js">
     <head>

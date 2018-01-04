@@ -40,7 +40,7 @@ var Model = Backbone.Model.extend({
 
 var Song = Model.extend({
 
-    urlRoot: '/api/songs',
+    url: '/api/songs',
     initialize: function () {
         console.log('A new song has been created.');
     },
@@ -88,6 +88,7 @@ var songs = new Songs([
 songs.fetch({
     success: function (resp) {
         console.log('Fetching songs success.');
+        webSongs.index(songs);
     },
     error: function () {
         console.log('Error in fetching songs.');
