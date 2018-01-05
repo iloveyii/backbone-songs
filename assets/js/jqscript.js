@@ -4,9 +4,7 @@ var webSongs = {
         var indexSongs = songs.toJSON();
         console.log('webSongs got songs: ', indexSongs);
         var ul = $('ul#songs');
-
-
-        ul.append(this.makeLi(indexSongs));
+        // ul.append(this.makeLi(indexSongs));
     },
 
     view: function (song) {
@@ -19,8 +17,6 @@ var webSongs = {
         });
         return li;
     }
-
-
 };
 
 $(document).ready(function () {
@@ -41,9 +37,9 @@ $(document).ready(function () {
         song.save({}, {
             success: function () {
                 songs.add(song);
-                $('ul#songs').empty();
+                /* $('ul#songs').empty();
                 $('ul#songs').append(webSongs.makeLi(songs.toJSON()));
-                console.log('New song added' + song);
+                console.log('New song added' + song); */
             }, 
             error: function () {
                 alert('Some error has occurred, please refresh the page.')
