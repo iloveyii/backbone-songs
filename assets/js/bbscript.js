@@ -127,10 +127,27 @@ var SongView = Backbone.View.extend({
                 author: this.$('.author').html(),
                 artist: this.$('.artist').html()
         });
-        // clean previous html
         this.controls().title.html('<input type="text" class="form-control title-update" value="'+this.controlsData.title+'" />');
         this.controls().author.html('<input type="text" class="form-control author-update" value="'+this.controlsData.author+'" />');
         this.controls().artist.html('<input type="text" class="form-control artist-update" value="'+this.controlsData.artist+'" />');
+        this.toggleButtons();
+    },
+    update: function () {
+        var data = {
+            title: this.$('.title-update').val(),
+            author: this.$('.author-update').val(),
+            artist: this.$('.artist-update').val()
+        };
+        this.setControlsData(data);
+
+        window.cd = this.controlsData;
+        console.log(this.controlsData);
+
+        this.controls().title.html(this.controlsData.title);
+        this.controls().author.html(this.controlsData.author);
+        this.controls().artist.html(this.controlsData.artist);
+        console.log(this.model.save(data));
+
         this.toggleButtons();
     },
     cancel: function () {

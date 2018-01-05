@@ -51,5 +51,5 @@ $(document).ready(function () {
         console.log(e.target.id);
    });
 
-    var songsView = new SongsView();
+    var songsView = window.songsView = new SongsView();
 });

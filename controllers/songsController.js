@@ -52,8 +52,17 @@ module.exports = function (app) {
         res.end();
     });
 
-    app.put('/api/songs/:song', urlEncodedParser, function (req, res) {
+    app.put('/api/songs', function (req, res) {
+        var index = songs.findIndex(function (song) {
+            console.log('inside find idex');
+            return song.id === req.body.id;
+        });
+        if(index >= 0) {
+            songs[index] = req.body;
+        }
 
+        res.json(songs);
+        res.end();
     });
 
     app.delete('/api/songs/:song', function (req, res) {
