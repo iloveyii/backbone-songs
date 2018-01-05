@@ -1,4 +1,4 @@
-
+// Backbone.Model.prototype.idAttribute = 'id';
 // a sample model for easy validation
 var Model = Backbone.Model.extend({
 
@@ -40,7 +40,8 @@ var Model = Backbone.Model.extend({
 
 var Song = Model.extend({
 
-    url: '/api/songs',
+    urlRoot: '/api/songs',
+    idAttribute: 'id',
     initialize: function () {
         console.log('A new song has been created.');
     },
@@ -155,6 +156,12 @@ var SongView = Backbone.View.extend({
         this.controls().author.html(this.controlsData.author);
         this.controls().artist.html(this.controlsData.artist);
         this.toggleButtons();
+    },
+    delete: function () {
+        // console.log('Removing model: ' + this.model.get('id'));
+        songs.remove(this.model);
+        this.model.destroy();
+        this.$el.remove();
     },
 
     toggleButtons: function () {

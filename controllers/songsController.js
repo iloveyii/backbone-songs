@@ -65,8 +65,12 @@ module.exports = function (app) {
         res.end();
     });
 
-    app.delete('/api/songs/:song', function (req, res) {
-
+    app.delete('/api/songs/:id', urlEncodedParser, function (req, res) {
+        songs = songs.filter(function (song) {
+            return song.id !== parseInt(req.params.id);
+        });
+        res.json(songs);
+        res.end();
     });
 
 }
