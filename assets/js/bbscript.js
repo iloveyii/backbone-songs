@@ -95,3 +95,35 @@ songs.fetch({
     }
 });
 
+// View for one model
+var SongView = Backbone.View.extend({
+    model: new Song(),
+    tagName: 'tr',
+    initialize: function () {
+        this.template = _.template($('.song-item-template').html());
+    },
+    render: function () {
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    }
+});
+
+
+// View for all models
+var SongsView = Backbone.View.extend({
+    model : songs,
+    el: $('.song-index'), // tbody
+    initialize: function () {
+        console.log('Inside songs view' + songs.toArray());
+        this.model.on('add', this.render, this);
+    },
+    render: function () {
+        var self = this;
+        this.$el.html('');
+        _.each(this.model.toArray(), function (sng) {
+            self.$el.append((new SongView({model:sng})).render().$el)
+        });
+        return this;
+    }
+});
+
