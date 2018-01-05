@@ -40,8 +40,8 @@ var Model = Backbone.Model.extend({
 
 var Song = Model.extend({
 
-    urlRoot: '/api/songs',
-    idAttribute: 'id',
+    urlRoot: '/api/songs',// very important for delete method
+    idAttribute: 'id', // very important for delete method else delete will fire only on api/songs without id
     initialize: function () {
         console.log('A new song has been created.');
     },
@@ -60,16 +60,6 @@ var Song = Model.extend({
 
         this.checkValidation(attrs, rules);
     }
-});
-
-// with instantiating
-var song = new Song({id: 2, title: 'Kan'});
-// with set
-song.set('name', 'My fav song');
-// with set using object with multiple attributes
-song.set({
-    title : 'Jackson',
-    artist: 'Michael'
 });
 
 // Collections
