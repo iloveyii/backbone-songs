@@ -108,7 +108,13 @@
             <td><span class="title"><%=title%></span></td>
             <td><span class="author"><%=author%></span></td>
             <td><span class="artist"><%=artist%></span></td>
-            <td><span class="controls">Edit</span></td>
+            <td nowrap><span class="controls">
+                <button class="btn btn-warning btn-sm item-edit">Edit</button>
+                <button class="btn btn-danger btn-sm item-delete">Delete</button>
+
+                <button style="display: none;" class="btn btn-primary btn-sm item-update">Update</button>
+                <button style="display: none;" class="btn btn-default btn-sm item-cancel">Cancel</button>
+            </span></td>
         </script>
 
         <script src="/assets/js/lib/jquery-min.js"></script>

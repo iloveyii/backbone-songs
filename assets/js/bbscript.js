@@ -99,6 +99,54 @@ songs.fetch({
 var SongView = Backbone.View.extend({
     model: new Song(),
     tagName: 'tr',
+    events: {
+        'click .item-edit' : 'edit',
+        'click .item-delete' : 'delete',
+        'click .item-update' : 'update',
+        'click .item-cancel' : 'cancel'
+    },
+    controls: function() {
+        return {
+            title: this.$('.title'),
+            author: this.$('.author'),
+            artist: this.$('.artist')
+        }
+    },
+    controlsData: {},
+    setControlsData: function (data) {
+        this.controlsData = {
+            title: data.title,
+            author: data.author,
+            artist: data.artist
+        };
+        return this.controlsData;
+    },
+    edit: function () {
+        this.setControlsData({
+                title: this.$('.title').html(),
+                author: this.$('.author').html(),
+                artist: this.$('.artist').html()
+        });
+        // clean previous html
+        this.controls().title.html('<input type="text" class="form-control title-update" value="'+this.controlsData.title+'" />');
+        this.controls().author.html('<input type="text" class="form-control author-update" value="'+this.controlsData.author+'" />');
+        this.controls().artist.html('<input type="text" class="form-control artist-update" value="'+this.controlsData.artist+'" />');
+        this.toggleButtons();
+    },
+    cancel: function () {
+        this.controls().title.html(this.controlsData.title);
+        this.controls().author.html(this.controlsData.author);
+        this.controls().artist.html(this.controlsData.artist);
+        this.toggleButtons();
+    },
+
+    toggleButtons: function () {
+        this.$('.item-edit').toggle();
+        this.$('.item-delete').toggle();
+
+        this.$('.item-update').toggle();
+        this.$('.item-cancel').toggle();
+    },
     initialize: function () {
         this.template = _.template($('.song-item-template').html());
     },
