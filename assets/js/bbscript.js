@@ -42,6 +42,9 @@ var Song = Model.extend({
 
     urlRoot: '/api/songs',// very important for delete method
     idAttribute: 'id', // very important for delete method else delete will fire only on api/songs without id
+    defaults: {
+        "filename": "horse.ogg"
+    },
     initialize: function () {
         console.log('A new song has been created.');
     },
@@ -68,18 +71,13 @@ var Songs = Backbone.Collection.extend({
     url: '/api/songs'
 });
 
-var songs = new Songs([
-    new Song({title: 'Title 01'}),
-    new Song({title: 'Title 02'}),
-    new Song({title: 'Title 03'}),
-    new Song({title: 'Title 04'})
-]);
+var songs = new Songs();
 
 // Fetching collections
 songs.fetch({
     success: function (resp) {
         console.log('Fetching songs success.');
-        webSongs.index(songs);
+        // webSongs.index(songs);
     },
     error: function () {
         console.log('Error in fetching songs.');
@@ -153,7 +151,6 @@ var SongView = Backbone.View.extend({
         this.model.destroy();
         this.$el.remove();
     },
-
     toggleButtons: function () {
         this.$('.item-edit').toggle();
         this.$('.item-delete').toggle();

@@ -4,25 +4,29 @@ var songs = [
             'id':1,
             'title':'A lovely song',
             'author':'Some Lover',
-            'artist':'Some Singer'
+            'artist':'Some Singer',
+            'filename':'horse.ogg'
         },
         {
             'id':10,
             'title':'A lovely song',
             'author':'Some Lover',
-            'artist':'Some Singer'
+            'artist':'Some Singer',
+            'filename':'horse.ogg'
         },
         {
             'id':2,
             'title':'A romantic song',
             'author':'Some Romeo',
-            'artist':'Some rummer'
+            'artist':'Some rummer',
+            'filename':'horse.ogg'
         },
         {
             'id':3,
             'title':'A pop song',
             'author':'Some Poper',
-            'artist':'Some pop band'
+            'artist':'Some pop band',
+            'filename':'horse.ogg'
         }
 ];
 
