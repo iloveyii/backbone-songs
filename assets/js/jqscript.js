@@ -20,6 +20,32 @@ var webSongs = {
 };
 
 $(document).ready(function () {
+
+    var fileInput = document.getElementById('userPhotoInput');
+    fileInput.addEventListener('change', function(e) {
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            console.log('file changed');
+            window.fileData = reader.result;
+            window.fileName = file.name;
+            // $('#fileData').val(reader.result);
+            // $('#fileName').val(file.name);
+        };
+        reader.readAsDataURL(file);
+    });
+
+
+
+
+
+
+
+
+
+
+
+
    var form = $('form');
    form.on('submit', function (e) {
        e.preventDefault();
@@ -30,8 +56,16 @@ $(document).ready(function () {
         var data = {
             title : title,
             author: author,
-            artist: artist
+            artist: artist,
+            fileName: window.fileName,
+            fileData: window.fileData
         };
+
+
+
+
+
+
 
         var song = new Song(data);
         song.save({}, {

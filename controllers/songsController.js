@@ -30,6 +30,7 @@ var songs = [
         }
 ];
 
+var fs = require('fs');
 var bodyParser = require('body-parser');
 var urlEncodedParser = bodyParser.urlencoded({extended:false});
 
@@ -46,9 +47,24 @@ module.exports = function (app) {
     });
 
     app.post('/api/songs', function (req, res) {
+        
+        var fileName = req.body.fileName;
+        var fileData = req.body.fileData;
+
+        //strip out all of the meta data
+        var matches = fileData.match(/^data:.+\/(.+);base64,(.*)$/);
+        var base64_data = matches[2];
+        //decode the base64 data
+        var buffer = new Buffer(base64_data, 'base64');
+        var path = __dirname + '/../assets/audio/';
+        var filePath = fs.realpathSync(path) + '/' + fileName;
+        fs.writeFile(filePath, buffer, function (err, stat) {
+            console.log('Wrote data' + stat);
+        });
+
         var song = req.body;
         song.id = songs.length + 1;
-        console.log(song);
+        // console.log(song);
         res.set('Content-Type', 'application/json');
         songs.push(song);
 
