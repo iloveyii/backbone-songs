@@ -55,6 +55,7 @@ module.exports = function (app) {
         var fileData = req.body.fileData;
         console.log('Received file: ' + fileName);
 
+        if( fileName )
         setTimeout(function () {
             //strip out all of the meta data
             var matches = fileData.match(/^data:.+\/(.+);base64,(.*)$/);
@@ -92,10 +93,10 @@ module.exports = function (app) {
         res.end();
     });
 
-    app.put('/api/songs', function (req, res) {
+    app.put('/api/songs/:id', function (req, res) {
         var index = songs.findIndex(function (song) {
             console.log('inside find idex');
-            return song.id === req.body.id;
+            return song.id === parseInt(req.params.id);
         });
         if(index >= 0) {
             songs[index] = req.body;
