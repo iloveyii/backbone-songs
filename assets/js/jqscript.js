@@ -54,6 +54,7 @@ $(document).ready(function () {
         song.save({}, {
             success: function () {
                 songs.add(song);
+                form[1].reset();
                 /* $('ul#songs').empty();
                 $('ul#songs').append(webSongs.makeLi(songs.toJSON()));
                 console.log('New song added' + song); */
