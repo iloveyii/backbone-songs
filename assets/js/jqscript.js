@@ -21,7 +21,7 @@ var webSongs = {
 
 $(document).ready(function () {
 
-    var fileInput = document.getElementById('userPhotoInput');
+    var fileInput = document.getElementById('song');
     fileInput.addEventListener('change', function(e) {
         var file = fileInput.files[0];
         var reader = new FileReader();
@@ -35,20 +35,10 @@ $(document).ready(function () {
         reader.readAsDataURL(file);
     });
 
-
-
-
-
-
-
-
-
-
-
-
    var form = $('form');
    form.on('submit', function (e) {
-       e.preventDefault();
+        e.preventDefault();
+
         var title = $('#title').val();
         var author = $('#author').val();
         var artist = $('#artist').val();
@@ -58,15 +48,8 @@ $(document).ready(function () {
             author: author,
             artist: artist,
             fileName: window.fileName,
-            fileData: window.fileData
+            fileData: window.fileData,
         };
-
-
-
-
-
-
-
         var song = new Song(data);
         song.save({}, {
             success: function () {

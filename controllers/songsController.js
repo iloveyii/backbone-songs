@@ -31,14 +31,17 @@ var songs = [
 ];
 
 var fs = require('fs');
+
 var bodyParser = require('body-parser');
 var urlEncodedParser = bodyParser.urlencoded({extended:false});
 
 module.exports = function (app) {
 
     // fix in body from backbone model post
-    app.use(bodyParser.json());
+    app.use(bodyParser.json({limit:1024102420, type:'application/json'}));
     app.use(bodyParser.urlencoded());
+    // app.use(bodyParser({limit: '50mb'}));
+
 
     app.get('/api/songs', function (req, res) {
         res.set('Content-Type', 'application/json');
@@ -50,19 +53,36 @@ module.exports = function (app) {
         
         var fileName = req.body.fileName;
         var fileData = req.body.fileData;
+        console.log('Received file: ' + fileName);
 
-        //strip out all of the meta data
-        var matches = fileData.match(/^data:.+\/(.+);base64,(.*)$/);
-        var base64_data = matches[2];
-        //decode the base64 data
-        var buffer = new Buffer(base64_data, 'base64');
-        var path = __dirname + '/../assets/audio/';
-        var filePath = fs.realpathSync(path) + '/' + fileName;
-        fs.writeFile(filePath, buffer, function (err, stat) {
-            console.log('Wrote data' + stat);
-        });
+        setTimeout(function () {
+            //strip out all of the meta data
+            var matches = fileData.match(/^data:.+\/(.+);base64,(.*)$/);
+            var base64_data = matches[2];
 
-        var song = req.body;
+            //decode the base64 data
+            var buffer = new Buffer(base64_data, 'base64');
+            console.log('Buffered');
+            var path = __dirname + '/../assets/audio/';
+            var filePath = fs.realpathSync(path) + '/' + fileName;
+            fs.writeFile(filePath, buffer, function (err, stat) {
+                if(err) {
+                    console.log('Error occcured in saving file.');
+                } else {
+                    console.log('Wrote data to path: ' + filePath);
+                }
+            });
+
+        }, 5000);
+
+        console.log('out of settimeout');
+        var song = {
+            id : req.body.id,
+            title: req.body.title,
+            author: req.body.author,
+            artist: req.body.artist,
+            filename: fileName
+        };
         song.id = songs.length + 1;
         // console.log(song);
         res.set('Content-Type', 'application/json');
