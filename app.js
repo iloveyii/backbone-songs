@@ -2,7 +2,6 @@
 var express = require('express');
 var fs = require('fs');
 var compression = require('compression');
-const fileUpload = require('express-fileupload');
 
 var songsController = require('./controllers/songsController');
 
@@ -10,7 +9,6 @@ var app = express();
 app.set('view engine', 'ejs');
 app.use('/assets', express.static('assets'));
 app.use(compression());
-app.use(fileUpload());
 
 // handle static pages here
 app.get('/', function (req, res) {
