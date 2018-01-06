@@ -1,6 +1,5 @@
+body, p { font-size: 20px; }
 
-body {
-	padding: 40px;
+td span input {
+	padding: 0.5rem 2rem !important;
 }
-
-body, p { font-size: 24px; }
