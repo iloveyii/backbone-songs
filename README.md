@@ -4,8 +4,8 @@ Backbone songs
 This is a small song application developed in node, backbone js. 
 
 ![main](http://backbone-song.softhem.se/assets/images/screenshot.png) 
-![edit](http://backbone-song.softhem.seassets/images/edit.png) 
-![form](http://backbone-song.softhem.se/assets/images/form.png) 
+
+![edit](http://backbone-song.softhem.se/assets/images/edit.png) 
 
 
 
