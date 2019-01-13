@@ -21,5 +21,5 @@ app.get('/', function (req, res) {
 // handle api call here using controllers
 songsController(app);
 
-app.listen(5000);
-console.log('Express is listening on port: 5000');
+app.listen(7000);
+console.log('Express is listening on port: 7000');
