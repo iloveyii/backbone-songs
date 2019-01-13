@@ -3,9 +3,9 @@ Backbone songs
 
 This is a small song application developed in node, backbone js. 
 
-![Screenshot](http://backbone-song.softhem.se/assets/images/screenshot.png) 
-![Screenshot](http://backbone-song.softhem.se/assets/images/edit.png) 
-![Screenshot](http://backbone-song.softhem.se/assets/images/form.png) 
+![Screenshot](http://backbone-song.softhem.se:7000/assets/images/screenshot.png) 
+![Screenshot](http://backbone-song.softhem.se:7000/assets/images/edit.png) 
+![Screenshot](http://backbone-song.softhem.se:7000/assets/images/form.png) 
 
 
 
